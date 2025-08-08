@@ -1,6 +1,6 @@
 #import "../styles.typ": *
 
-= Título do Capítulo
+= Cálculo Integral
 
 #lorem(20)
 

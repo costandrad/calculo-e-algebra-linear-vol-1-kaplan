@@ -1,4 +1,4 @@
-#let primary-color = rgb("#f00024")
+#let primary-color = rgb("#59017e")
 
 #let fmt(number, precision: 3,  sci: true) = {
   if number == 0 {
@@ -74,7 +74,7 @@
       column-gutter: 15pt,
       align: (left+bottom, right+horizon),
       [
-        #cite(<Halliday2>, form: "full")
+        #cite(<kaplan-v1>, form: "full")
       ],
       [
         #image("assets/images/capa.png", width: 3cm)
@@ -219,12 +219,14 @@
   )
 
   //set math.equation(numbering: "(1)", number-align: bottom)
+  set math.mat(align: right, delim: "[")
 
 
   // 🧭 Numeração de seções e listas
   set heading(numbering: "1.1.")
   show heading: set text(size: 12pt, fill: primary-color)
   show heading.where(): it => custom-headings(it)
+  /*
   set list(marker: text(primary-color)[-])
     set enum(
     numbering: it => context {
@@ -237,6 +239,7 @@
         strong(text(primary-color)[#sec.#it.])
       }
   })
+  */
 
   
   body

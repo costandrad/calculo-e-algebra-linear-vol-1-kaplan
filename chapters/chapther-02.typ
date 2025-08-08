@@ -1,6 +1,6 @@
 #import "../styles.typ": *
 
-= Título do Capítulo
+= Limites
 
 #lorem(20)
 
