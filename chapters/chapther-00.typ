@@ -50,6 +50,121 @@
       $
     ])
 
++ Determine se $x < y$, $x = y$ ou $x > y$ para cada um dos seguintes casos:
+  #set enum(numbering: "(a)")
+  + $x = -3, y = 2$
+    #solution([
+      $
+        x - y = -3 - 2 = -5 < 0 arrow.double x < y
+      $
+    ])
+
+  + $x = 1, y = -2$
+    #solution([
+      $
+        x - y = 1 - (-2) = 1 + 2 = 3 > 0 arrow.double x > y
+      $
+    ])
+
+  + $x = sqrt(5) - sqrt(3), y = sqrt(7) - sqrt(2)$
+    #solution([
+      $
+        y - x &= sqrt(7) - sqrt(2) - (sqrt(5) - sqrt(3)) = sqrt(7) - sqrt(2) - sqrt(5) + sqrt(3) = (sqrt(7) - sqrt(5)) + (sqrt(3) - sqrt(2))
+      $
+      Note que $sqrt(7) - sqrt(5) > 0$ e $sqrt(3) - sqrt(2) > 0$, então
+      $
+        y - x = (sqrt(7) - sqrt(5)) + (sqrt(3) - sqrt(2)) > 0 arrow.double y > x arrow.double x < y
+      $
+    ])
+
+      \
+  + $display(x = frac(1, sqrt(3) - sqrt(11))), display(y = frac(1, sqrt(3) - sqrt(13)))$
+    #solution([
+      Sejam $u = display(1/x) = sqrt(3) - sqrt(11)$ e $v = display(1/y) = sqrt(3) - sqrt(13)$. Façamos:
+      $
+        u - v &= sqrt(3) - sqrt(11) - (sqrt(3) - sqrt(13)) = sqrt(3) - sqrt(11) - sqrt(3) + sqrt(13) = sqrt(13) - sqrt(11)
+      $
+      Note que
+      $
+        sqrt(13) > sqrt(11) arrow.double sqrt(13) - sqrt(11) > 0 &arrow.double u - v > 0 arrow.double u > v arrow.double 1/x > 1/y arrow.double x < y
+      $
+    ])
+
++ Calcule: 
+  #set enum(numbering: "(a)")
+  + $|-3,5|$
+
+    #solution([
+      $|-3,5| = -(-3,5) = 3,5$, pois $-3,5 < 0$.
+    ])
+
+  + $|0,2|$
+
+    #solution([
+      $|0,2| = 0,2$, pois $0,2 > 0$.
+    ])
+
+  + $| |x| |$
+
+    #solution([
+      Dado que $|x| >= 0 quad forall x in RR$, então
+      $
+        | |x| | = |x| = cases(
+          &x", se " x >= 0\
+          -&x", se " x < 0
+        )
+      $
+    ])
+    \
+  + $|-|x| |$
+
+    #solution([
+      Dado que $|x| >= 0 quad forall x in RR$, então
+      $
+        -|x| <= 0 arrow.double | -|x| | = -(-|x|) = |x| = cases(
+          &x", se " x >= 0\
+          -&x", se " x < 0
+        )
+      $
+    ])
+
+  + $|x - y| - |y - x|$
+
+    #solution([
+      $
+        |x - y| - |y - x| &= |x-y| - |-(x - y)| = |x-y| - |-1| dot |x-y|\
+        &= |x-y| - 1 dot|x-y| = |x-y| - |x-y| = 0
+      $
+    ])
+
++ Mostre que $|a-b|$ pode ser interpretado como a distância entre $a$ e $b$ sobre o eixo dos números.
+
+  #solution([
+    $
+      |a-b| = cases(
+        &a-b &", se " a - b >= 0\
+        -&(a-b) &", se " a - b < 0
+      ) 
+      = cases(
+        &a-b &", se " a >= b\
+        &b-a &", se " a < b
+      ) 
+    $
+
+    A definição geométrica da distância entre dois pontos na reta real é dada pela diferença entre o maior e o menor, ou seja:
+
+    $
+      d(a, b) = max(a,b) = min(a,b).
+    $
+
+    Então, para cada caso:
+
+    - Se $ a >= b$, $d(a, b) = max(a,b) = min(a,b) = a - b = |a-b|$;
+    - Se $a < b$, $d(a, b) = max(a,b) = min(a,b) = b - a = |a-b|$.
+
+    Em ambos os casos, $d(a, b) = |a-b|$.
+    
+  ])
 
 
 
