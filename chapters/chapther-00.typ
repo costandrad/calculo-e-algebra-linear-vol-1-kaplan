@@ -166,5 +166,162 @@
     
   ])
 
++ Achar $x$ em cada um dos casos: 
+  #set enum(numbering: "(a)")
+  + $|x| = 0$
 
+    #solution([
+      $
+        |x| = 0 arrow.double x = 0
+      $
+    ])
+
+  + $|x| = 2$
+    #solution([
+      $
+        |x| = 2 arrow.double x = plus.minus 2
+      $
+    ])
+
+  + $|x - 1| = 2$
+    #solution([
+      $
+        |x - 1| = 2 arrow.double x - 1 = plus.minus 2 arrow.double 
+        cases(
+          x - 1= &2\
+          x-1 = -&2
+        )
+        arrow.double cases(
+          x = &3\
+          x = -&1
+        )
+      $
+    ])
+
+  + $|x+1| = 1$
+    #solution([
+      $
+        |x + 1| = 1 arrow.double x + 1 = plus.minus 1 arrow.double 
+        cases(
+          x + 1= &1\
+          x + 1 = -&1
+        )
+        arrow.double cases(
+          x = &0\
+          x = -&2
+        )
+      $
+    ])
+
+
+
++ O símbolo $sqrt(x)$ indica $0$ se $x = 0$ e a raiz quadrada positiva de $x$, se $x > 0$. Justifique as seguintes regras para todos reais $x$ e $y$.
+
+  #set enum(numbering: "(a)")
+  + $sqrt(x^2) = |x|$
+    #solution([
+      Para $x = 0$, a identidade é imediata. Se $x > 0$
+      $sqrt(x^2) = x = |x|$ e se $x < 0$, $sqrt(x^2) = -x = |x|$. Em todo caso, 
+      $
+        sqrt(x^2) = |x|
+      $
+    ])
+  
+  + $sqrt(x^4) = x^2$
+
+    #solution([
+      $
+        sqrt(x^4) = sqrt((x^2)^2) = x^2
+      $
+    ])
+
+  + $(x|x|)^2 = x^4$
+    #solution([
+      $
+        (x|x|)^2 = x^2 dot (|x|)^2 = x^2 dot x^2 = x^4
+      $
+    ])
+
+  + $sqrt(x^2 - 2x y + y^2) = |x-y|$
+
+    #solution([
+      $
+        sqrt(x^2 - 2x y + y^2) = sqrt((x-y)^2) = |x-y|
+      $
+    ])
+
++ Mostre que as regras 20 e 21 são válidas para todos os números reais $a$ e $b$.
+
+  #solution([
+    - Regra 20: $|a| = |-a|$
+
+      - Para $a = 0$, a identidade é imediatamente válida;
+      - Para $a > 0$, temos: $|a| = a$ e $|-a| = -(-a) = a = |a|$;
+      - Para $a < 0 arrow.double -a > 0$, temos: $|a| = -a$ e $|-a| = -a = |a|$.
+      Portanto, a regra 20 é verdadeira para todo número real.
+
+    - Regra 21: $|a b| = |a| |b|$
+      - Para $a = b = 0$, a identidade é imediatamente válida;
+      - Caso 1: $a$ e $b$ têm mesmo sinal. 
+
+        Quando ambos os números são positivos, ou seja, $a > 0$ e $b > 0$, temos:
+        $
+          a b > 0 arrow.double |a b| = a b = |a| |b|
+        $
+
+        Quando ambos os número são negativos, ou seja, $a < 0$ e $b < 0$, temos:
+        $
+          a b > 0 arrow.double |a b| = a b = (-a)(-b) = |a||b|
+        $
+
+      - Caso 2: $a$ e $b$ têm sinais distintos. Sem perda de generalidade, consideremos: $a > 0$ e $b < 0$. O produto entre os números é negativos. Então,
+      $
+         a b < 0 arrow.double |a b| = - (a b) = a (-b) = |a| |b|.
+      $
+  ])
+
++ 
+  #set enum(numbering: "(a)")
+  + $a < b$ implica $a^2 < b^2$?
+    #solution([
+      Não, basta considerar o contra-exemplo $a = -2$ e $b = -1$, tal que $a < b$, mas $a^2 > b^2$.
+    ])
+
+  + $a < b$ implica $a^3 < b^3$?
+    #solution([
+    ])
+
+
+
+
+
+== Problemas da página 9
+
++ Seja $NN$ o conjuto de todos os inteiros positivos. Mostre que cada um dos seguintes conjuntos é finito e exiba seus elementos.
+  #set enum(numbering: "(a)")
+  + ${x | x " está em " NN " e " x < 5}$
+    #solution([
+      ${x | x " está em " NN " e " x < 5} = {0, 1, 2, 3, 4}$
+    ])
+
+  + ${x | x " está em " NN " e " 11 < x^3 < 134}$
+    #solution([
+      $
+        11 < x^3 < 134 &arrow.double 3^3 <= x^3 <= 5^3\ 
+          &arrow.double {x | x " está em " NN " e " 11 < x^3 < 134} = {3, 4, 5}
+      $
+    ])
+
+  + ${x | x " está em " NN " e " x^2 + x -1 < 50}$
+    #solution([
+    #let xs = range(50)
+    #let ys = xs.filter(x => calc.pow(x, 2) + x - 1 < 50)
+
+    
+    
+    $
+      {x | x " está em " NN " e " x^2 + x -1 < 50} =  {#ys.map(x => str(x)).join(", ")}
+    $
+
+    ])
 
