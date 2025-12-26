@@ -2,7 +2,7 @@
 
 
 
-#set heading(numbering: (n1, ..x) => numbering("1.", n1 - 1, ..x))
+// #set heading(numbering: (n1, ..x) => numbering("1.", n1 - 1, ..x))
 
 = Introdução
 
@@ -15,7 +15,7 @@
     #solution([
       $
         10 sqrt(2) < x < 10 sqrt(3) &arrow.double (10 sqrt(2))^2 < x^2 < (10 sqrt(3))^2 arrow.double 200 < x^2 < 300\
-          &arrow.double x^2 = cases(225\ 256\ 289) arrow.double x = cases(15\ 16\ 17)
+          &arrow.double x^2 = cases(225, 256,289) arrow.double x = cases(15, 16, 17)
       $
     ])
 
@@ -26,7 +26,7 @@
         -5sqrt(2) < x < -3 sqrt(3) dot (-1) &arrow.double 5sqrt(2) > -x > 3 sqrt(3) arrow.double 3sqrt(3) < -x < 5 sqrt(2)\
         &arrow.double (3sqrt(3))^2 < (-x)^2 < (5 sqrt(2))^2\
         &arrow.double 27 < (-x)^2 < 50\
-        &arrow.double (-x)^2 = cases(36\ 49) arrow.double -x = cases(6\ 7) arrow.double x = cases(-6, -7)
+        &arrow.double (-x)^2 = cases(36, 49) arrow.double -x = cases(6, 7) arrow.double x = cases(-6, -7)
       $
     ])
 
@@ -110,7 +110,7 @@
       Dado que $|x| >= 0 quad forall x in RR$, então
       $
         | |x| | = |x| = cases(
-          &x", se " x >= 0\
+          &x", se " x >= 0,
           -&x", se " x < 0
         )
       $
@@ -122,7 +122,7 @@
       Dado que $|x| >= 0 quad forall x in RR$, então
       $
         -|x| <= 0 arrow.double | -|x| | = -(-|x|) = |x| = cases(
-          &x", se " x >= 0\
+          &x", se " x >= 0,
           -&x", se " x < 0
         )
       $
@@ -132,7 +132,7 @@
 
     #solution([
       $
-        |x - y| - |y - x| &= |x-y| - |-(x - y)| = |x-y| - |-1| dot |x-y|\
+        |x - y| - |y - x| &= |x-y| - |-(x - y)| = |x-y| - |-1| dot |x-y|,
         &= |x-y| - 1 dot|x-y| = |x-y| - |x-y| = 0
       $
     ])
@@ -142,11 +142,11 @@
   #solution([
     $
       |a-b| = cases(
-        &a-b &", se " a - b >= 0\
+        &a-b &", se " a - b >= 0,
         -&(a-b) &", se " a - b < 0
       ) 
       = cases(
-        &a-b &", se " a >= b\
+        &a-b &", se " a >= b,
         &b-a &", se " a < b
       ) 
     $
@@ -188,11 +188,11 @@
       $
         |x - 1| = 2 arrow.double x - 1 = plus.minus 2 arrow.double 
         cases(
-          x - 1= &2\
+          x - 1= &2,
           x-1 = -&2
         )
         arrow.double cases(
-          x = &3\
+          x = &3,
           x = -&1
         )
       $
@@ -203,11 +203,11 @@
       $
         |x + 1| = 1 arrow.double x + 1 = plus.minus 1 arrow.double 
         cases(
-          x + 1= &1\
+          x + 1= &1,
           x + 1 = -&1
         )
         arrow.double cases(
-          x = &0\
+          x = &0,
           x = -&2
         )
       $
@@ -323,5 +323,130 @@
       {x | x " está em " NN " e " x^2 + x -1 < 50} =  {#ys.map(x => str(x)).join(", ")}
     $
 
+    ])
+
+  + ${x | |x| < sqrt(2) " e " x " ou " -x " está em " NN}$.
+
+    #solution([
+      #let xs = range(-5, 5).filter(x => calc.abs(x) < calc.sqrt(2))
+      $ 
+        {x | |x| < sqrt(2) " e " x " ou " -x " está em " NN} = {#xs.map(x => str(x)).join(", ")}
+      $
+    ])
+
++ Determine se 3 pertence aos seguintes conjuntos:  
+  #set enum(numbering: "(a)")
+  + ${x | x > -2 } union {x | x < 0}$
+    #solution([
+      Note que:
+      $
+        {x | x > -2 } union {x | x < 0} = {x | x != -2 " ou " x != 0}.
+      $
+      Portanto, $3 in {x | x != -2 " ou " x != 0}$, como ilustra o diagrama abaixo: 
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          line((-2, 0), (-2, -3), stroke: (dash: "dashed", paint: gray))
+          line((0, 0), (0, -3), stroke: (dash: "dashed", paint: gray))
+
+          line((-5, 0), (5, 0), mark: (end: ">>", fill: black), name:"set-1")
+          content("set-1.end", [$x$], anchor: "north-west")
+          for x in range(-4, 5) {
+            line((x, 0.2), (x, -0.2), name:"set-1-ticks")
+            content("set-1-ticks.end", [$#x$], anchor: "north", padding: "0.1")
+          }
+          content("set-1.start", [$x > -2$], anchor: "east", padding: 0.2)
+          line((-2, 0), (4.7, 0), stroke: 2.5pt+primary-color)
+          circle((-2, 0), radius:3pt, stroke: 2.5pt+primary-color, fill: white)
+
+          line((-5, -1.5), (5, -1.5), mark: (end: ">>", fill: black), name:"set-2")
+          content("set-2.end", [$x$], anchor: "north-west")
+          for x in range(-4, 5) {
+            line((x, -1.3), (x, -1.7), name:"set-2-ticks")
+            content("set-2-ticks.end", [$#x$], anchor: "north", padding: "0.1")
+          }
+          content("set-2.start", [$x < 0$], anchor: "east", padding: 0.2)
+          line((-5, -1.5), (0, -1.5), stroke: 2.5pt+primary-color)
+          circle((0, -1.5), radius:3pt, stroke: 2.5pt+primary-color, fill: white)
+
+          line((-5, -3), (5, -3), mark: (end: ">>", fill: black), name:"set-3")
+          content("set-3.end", [$x$], anchor: "north-west")
+          for x in range(-4, 5) {
+            line((x, -2.8), (x, -3.2), name:"set-3-ticks")
+            content("set-3-ticks.end", [$#x$], anchor: "north", padding: "0.1")
+          }
+          content("set-3.start", [$x != -2 " ou " x != 0$], anchor: "east", padding: 0.2)
+          line((-5, -3), (4.7, -3), stroke: 2.5pt+primary-color)
+          circle((-2, -3), radius:3pt, stroke: 2.5pt+primary-color, fill: white)
+          circle((0, -3), radius:3pt, stroke: 2.5pt+primary-color, fill: white)
+        })
+      ]
+    ])
+
+  + ${x | x^2 < 5} inter {x^2 - 1 "é um número par"}$
+      #solution([
+        O primeiro conjunto é facilmente identificável: $x^2 < 5 &=> -sqrt(5) < x < sqrt(5)$. Quanto ao segundo conjunto, observemos que
+        $
+          x^2 - 1 " é um número par" &=> x^2 - 1 = 2k " para " k in ZZ\
+          &=> x^2 = 2k + 1 " para " k in ZZ\
+          &=> x^2 "é um número ímpar"\
+          &=> x "é um número ímpar"
+        $
+
+        #let xs = range(-5, 5).filter(x => calc.pow(x, 2) < 5 and calc.rem(calc.pow(x, 2)-1, 2) == 0)
+
+        Então, 
+        $
+          {x | x^2 < 5} inter {x^2 - 1 "é um número par"} = {#xs.map(x => str(x)).join(", ")},
+        $
+        Portanto, $3 in.not {#xs.map(x => str(x)).join(", ")}$, como ilustra o diagrama seguinte:
+
+        #figure()[
+          #cetz.canvas({
+            import cetz.draw: *
+
+            line((-calc.sqrt(5), 0), (-calc.sqrt(5), -3), stroke: (dash: "dashed", paint: gray))
+            line((calc.sqrt(5), 0), (calc.sqrt(5), -3), stroke: (dash: "dashed", paint: gray))
+
+            line((-5, 0), (5, 0), mark: (end: ">>", fill: black), name: "set-1")
+            content("set-1.end", [$x$], anchor: "north-west")
+            for x in range(-4, 5) {
+              line((x, 0.2), (x, -0.2), name: "ticks-1")
+              content("ticks-1.end", [$#x$], anchor: "north", padding: 0.1)
+              line((-calc.sqrt(5), 0), (calc.sqrt(5), 0), stroke: 2.5pt+primary-color)
+            }
+
+            for x in ((-calc.sqrt(5), "-"), ( calc.sqrt(5), "+")) {
+              circle((x.at(0), 0), radius: 3pt, stroke: 2pt+primary-color, fill: white, name:"pt")
+              content("pt", [$#x.at(1)sqrt(5)$], anchor: "south", padding: 0.3)
+            }
+
+            line((-5, -1.5), (5, -1.5), mark: (end: ">>", fill: black), name: "set-2")
+            content("set-2.end", [$x$], anchor: "north", padding: 0.2)
+            for x in range(-4, 5) {
+              line((x, -1.3), (x, -1.7), name: "ticks")
+              content("ticks.end", [$#x$], anchor: "north", padding: 0.1)
+            }
+            for x in range(-3, 5, step: 2) {
+              circle((x, -1.5), radius: 4pt, fill: primary-color, stroke: none)
+            }
+
+            line((-5, -3), (5, -3), mark: (end: ">>", fill: black), name: "set-3")
+            content("set-3.end", [$x$], anchor: "north-west")
+            for x in range(-4, 5) {
+              line((x, -2.8), (x, -3.2), name: "ticks")
+              content("ticks.end", [$#x$], anchor: "north", padding: 0.1)
+            }
+            for x in range(-1, 2, step: 2) {
+              circle((x, -3), radius: 4pt, fill: primary-color, stroke: none)
+            }
+
+          })
+        ]
+      ])
+  + O conjunto vazio.
+    #solution([
+      $ 3 in.not emptyset $
     ])
 

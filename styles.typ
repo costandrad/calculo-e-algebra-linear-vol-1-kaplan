@@ -1,3 +1,6 @@
+#import "@preview/cetz:0.4.2"
+#import "@preview/cetz-plot:0.1.3": *
+
 #let primary-color = rgb("#59017e")
 
 #let fmt(number, precision: 3,  sci: true) = {
