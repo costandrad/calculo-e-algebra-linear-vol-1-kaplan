@@ -117,6 +117,12 @@
   #v(12pt)
 ]
 
+
+
+
+
+
+
 #let solution(body) = {
   set par(first-line-indent: 0pt)
   box(
@@ -172,6 +178,7 @@
   )
 
   set heading(numbering: "1.1.")
+
 
   mkcover(book.title, book.author.long, author, primary-color)
 
@@ -243,6 +250,8 @@
       }
   })
   */
+
+
 
   
   body

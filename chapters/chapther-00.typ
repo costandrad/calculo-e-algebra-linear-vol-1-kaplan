@@ -2,7 +2,7 @@
 
 
 
-// #set heading(numbering: (n1, ..x) => numbering("1.", n1 - 1, ..x))
+
 
 = Introdução
 
@@ -449,4 +449,45 @@
     #solution([
       $ 3 in.not emptyset $
     ])
+
+
++ Descreva todos os subconjuntos de cada um dos conjuntos:
+  #set enum(numbering: "(a)")
+  + O conjunto consistindo de 0 e 1.
+    #solution([
+      Seja $A = {0, 1}$. Sabendo que $A$ possui $n = 2$ elementos, devemos ter $2^n = 2^2 = 4$ subconjuntos, quais sejam:
+      $
+        emptyset, {0}, {1}, {0, 1}.
+      $
+    ])
+
+  + O conjunto consistindo de uma caneta, um lápis e uma borracha.
+    #solution([
+      Seja $B = {"caneta", "lápis", "borracha"}$ um conjunto de $n = 3$ elementos. Temos $2^n = 2^3 = 8$ subconjuntos, como mostrado abaixo:
+      $
+        emptyset,\
+        {"caneta"}, {"lápis"}, {"borracha"},\
+        {"caneta", "lápis"}, {"caneta", "borracha"}, {"lápis", "borracha"},\
+        {"caneta", "lápis", "borracha"} 
+      $
+    ])
+
+  + O conjunto consistindo de todos os pares $(x, y)$, onde $x = 0$ ou $1$ e $y = 0$ ou $1$.
+    #solution([
+      Seja o conjunto 
+      $
+        C = {(x, y) | x in {0, 1} " e " y in {0, 1}} = {(0, 0), (0, 1), (1, 0), (1, 1)}.
+      $
+      Como o cojunto $C$ possui $n = 4$ elementos, terá $2^n = 2^4 = 16$ subconjuntos, quais sejam:
+      $
+        emptyset,\
+        {(0, 0)}, {(0, 1)}, {(1, 0)}, {(1, 1)},\
+        {(0, 0), (0, 1)}, {(0, 0), (1, 0)}, {(0, 0), (1, 1)}, {(0, 1), (1, 0)}, {(0, 1), (1, 1)}, {(1, 0), (1, 1)}, \
+        {(0, 0), (0, 1), (1, 0)}, {(0, 0), (0, 1), (1, 1)}, {(0, 0), (1, 0), (1, 1)}, {(0, 1), (1, 0), (1, 1)},\
+        {(0, 0), (0, 1), (1, 0), (1, 1)}.
+      $
+
+
+    ])
+  
 
