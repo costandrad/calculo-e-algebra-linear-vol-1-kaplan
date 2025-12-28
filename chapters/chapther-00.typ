@@ -489,5 +489,66 @@
 
 
     ])
+
++ Para cada uma das seguintes desigualdades descreva o conjunto de números reais $x$ para os quais a desigualdade é válida:
+  #let opts = (
+    size: (4, 4), 
+    axis-style: "school-book",
+    x-tick-step: none, y-tick-step: none,
+  )
+  #let line-styles = (
+    stroke: 1pt+primary-color
+  )
+  #set enum(numbering: "(a)")
+  + $x^2 < 4$
+    #solution([
+      $
+        x^2 < 4 => x^2 - 4 < 0 => -2 < x < 2 => {x in RR| -2 < x < 2 }
+      $
+
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+          
+          plot.plot(..opts, {
+            plot.add(
+              style: line-styles,
+              domain: (-2.5, 2.5),
+              x => calc.pow(x, 2) - 4
+            )
+            plot.annotate({
+              //line((-2, 0.2), (-2, -0.2))
+              content((-2, -0.2), [$-2$], anchor: "south-east", padding: 0.2)
+            })
+            plot.annotate({
+              //line((2, 0.2), (2, -0.2))
+              content((2, -0.2), [$2$], anchor: "south-west", padding: 0.2)
+            })
+            plot.add-fill-between(
+              domain: (-2, 2),
+              x => 0, 
+              x => calc.pow(x, 2) - 4,
+              style: (stroke: none, fill: primary-color.transparentize(85%))
+            )
+            plot.add(
+              ((-2, 0), (2, 0),),
+              mark: "o",
+              style: (stroke: 2.5pt+primary-color),
+              mark-style: (stroke: 1.5pt+primary-color, fill: white)
+            )
+            
+          })
+        })
+      ]
+    ])
+
+  + $x < 4$
+    #solution([])
+  
+  + $x < 4$
+    #solution([])
+
+  + $x < 4$
+    #solution([])
   
 
