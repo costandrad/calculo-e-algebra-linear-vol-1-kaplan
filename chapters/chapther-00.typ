@@ -676,7 +676,42 @@
       $
     ])
 
-  + $x < 4$
-    #solution([])
+  + $(x - 1)(x - 2) < 0$
+    #solution([
+      consideremos a função $f(x) = (x-1)(x-2)$. 
+      Iniciamos determinando os zeros de $f(x)$:
+      $
+        f(x) = 0 => (x-1)(x-2) = 0 => 
+        cases(
+          x-1 = 0 "ou",
+          x-2=0
+        ) => cases(
+          x = 1 "ou",
+          x = 2
+        )
+      $
+      Reescrevendo $f(x)$ como $f(x) = x^2 -3x + 2$, temos que o coeficiente do termo $x^2$ é igual a $1 < 0$, ou seja, o gráfico da função é uma parábola com concavidade voltada para cima. 
+
+      O esboço do gráfico seguinte mostra o estudo do sinal de $f(x)$:
+
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          plot.plot(..opts, x-min: -.25, x-max: 3.25, y-max: 3, {
+            plot.add(
+              domain: (-1, 4),
+              x => (x - 1)*(x - 2),
+              style: line-styles
+            )
+            plot.add-fill-between(
+              domain: (1, 2),
+              x => 0, x => (x - 1)*(x - 2),
+
+            )
+          })
+        })
+      ]
+    ])
   
 
