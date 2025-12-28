@@ -492,9 +492,10 @@
 
 + Para cada uma das seguintes desigualdades descreva o conjunto de números reais $x$ para os quais a desigualdade é válida:
   #let opts = (
-    size: (4, 4), 
+    size: (5, 5), 
     axis-style: "school-book",
     x-tick-step: none, y-tick-step: none,
+    //x-equal: "y",
   )
   #let line-styles = (
     stroke: 1pt+primary-color
@@ -510,10 +511,11 @@
         #cetz.canvas({
           import cetz.draw: *
           
-          plot.plot(..opts, {
+          plot.plot(..opts, y-max: 3, {
             plot.add(
               style: line-styles,
-              domain: (-2.5, 2.5),
+              samples: 500, 
+              domain: (-3, 3),
               x => calc.pow(x, 2) - 4
             )
             plot.annotate({
@@ -536,14 +538,85 @@
               style: (stroke: 2.5pt+primary-color),
               mark-style: (stroke: 1.5pt+primary-color, fill: white)
             )
+
+            plot.annotate({
+              circle((-3, 1), radius: 12pt, stroke: 1.2pt+primary-color, fill: white, name:"c1")
+              content("c1", [#text(primary-color)[$+$]])
+            })
+            plot.annotate({
+              circle((3, 1), radius: 12pt, stroke: 1.2pt+primary-color, fill: white, name:"c2")
+              content("c2", [#text(primary-color)[$+$]])
+            })
+            plot.annotate({
+              circle((0, -2), radius: 12pt, stroke: 1.2pt+primary-color, fill: white, name:"c3")
+              content("c3", [#text(primary-color)[$-$]])
+            })
+
             
           })
         })
       ]
     ])
 
-  + $x < 4$
-    #solution([])
+  + $x(x - 1) <= 0$
+    #solution([
+      Inicialmente, determinemos os zeros de $f(x) = x(x-1)$:
+      $
+        f(x) = 0 &=> x(x-1) = 0 => 
+        cases(
+          x = 0 "ou",
+          x - 1= 0
+        ) => cases(
+          x = 0 "ou",
+          x = 1
+        )
+      $
+      Note que a função $f(x) = x(x - 1)$ é uma parábola cujo coeficiente do termo $x^2$ é $a = 1 < 0$. Ou seja, uma parábola cujo vértice é um ponto de mínimo, como ilustra o esboço abaixo:
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          plot.plot(..opts, x-min: -0.4, x-max: 1.4, y-max: .5, name: "plot", {
+            plot.add(
+              style: line-styles,
+              domain: (-1, 2),
+              x => x * (x - 1)
+            )
+            plot.annotate({
+              content((1, 0), [$1$], anchor: "south-west", padding: -0.08)
+            })
+            plot.add(
+              ((0, 0), (1, 0), ),
+              style: (stroke: 2.5pt+primary-color),
+              mark: "o",
+              mark-style: (stroke: 1.5pt+primary-color, fill: primary-color)
+            )
+            plot.add-fill-between(
+              domain: (0, 1),
+              x => 0, 
+              x => x * (x - 1),
+              style: (
+                stroke: none,
+                fill: primary-color.transparentize(85%)
+              )
+            )
+            plot.add-anchor("p1", (-0.4, 0.2))
+            plot.add-anchor("p2", (1.4, 0.2))
+            plot.add-anchor("p3", (0.5, -0.1))
+          })
+          circle("plot.p1", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p1", [#text(primary-color)[$+$]])
+          circle("plot.p2", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p2", [#text(primary-color)[$+$]])
+          circle("plot.p3", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p3", [#text(primary-color)[$-$]])
+        })
+      ]
+      Portanto, 
+      $
+        x (x-1) <= 0 => {x in RR| 0 <= x <= 1}.
+      $
+    ])
   
   + $x < 4$
     #solution([])
