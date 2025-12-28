@@ -618,8 +618,63 @@
       $
     ])
   
-  + $x < 4$
-    #solution([])
+  + $x (x - 1) > 0$
+    #solution([
+      Note que o lado esquerdo da desigualdade acima é idêntico ao da expressão do item (b). Conforme análise gráfica do sinal da função $f(x) = x(x-1)$,
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          plot.plot(..opts, x-min: -0.6, x-max: 1.6, y-max: .5, name: "plot", {
+            plot.add(
+              style: line-styles,
+              domain: (-1, 2),
+              x => x * (x - 1)
+            )
+            plot.annotate({
+              content((1, 0), [$1$], anchor: "south-west", padding: -0.08)
+            })
+            plot.add(
+              ((0, 0), (1, 0), ),
+              style: (stroke: 2.5pt+primary-color),
+              mark: "o",
+              mark-style: (stroke: 1.5pt+primary-color, fill: white)
+            )
+            plot.add-fill-between(
+              domain: (-.6, 0),
+              x => 0, 
+              x => x * (x - 1),
+              style: (
+                stroke: none,
+                fill: primary-color.transparentize(85%)
+              )
+            )
+            plot.add-fill-between(
+              domain: (1, 1.6),
+              x => 0, 
+              x => x * (x - 1),
+              style: (
+                stroke: none,
+                fill: primary-color.transparentize(85%)
+              )
+            )
+            plot.add-anchor("p1", (-0.4, 0.2))
+            plot.add-anchor("p2", (1.4, 0.2))
+            plot.add-anchor("p3", (0.5, -0.1))
+          })
+          circle("plot.p1", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p1", [#text(primary-color)[$+$]])
+          circle("plot.p2", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p2", [#text(primary-color)[$+$]])
+          circle("plot.p3", radius: 10pt, stroke: 1.5pt+primary-color, fill: white)
+          content("plot.p3", [#text(primary-color)[$-$]])
+        })
+      ] 
+      Portanto, 
+      $
+        x (x - 1) > 0 => {x in RR | x < 0 "ou" x > 1}
+      $
+    ])
 
   + $x < 4$
     #solution([])
