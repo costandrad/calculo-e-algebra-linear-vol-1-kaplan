@@ -1,7 +1,24 @@
 #import "../styles.typ": *
 
 
+#set table(
+  stroke: 1pt+primary-color.mix(white),
+  fill: (x, y) => 
+    if y == 0 {
+      primary-color
+    } else if calc.rem(y, 2) == 0 {
+    primary-color.transparentize(85%)
+    } 
+)
 
+#show table.cell: it => {
+  if it.y == 0 {
+    set text(white)
+    strong(it)
+  } else {
+    it
+  }
+}
 
 
 = Introdução
@@ -1048,5 +1065,284 @@
           1/x < -1 => {x in RR | -1 < x < 0}
         $
     ])
-  
+
++ Classifique cada um dos seguintes intervalos em função dos tipos mostrados na Fig. 0-5.
+  #set enum(numbering: "(a)")
+  + $-1 <= x <= 1$
+  + $-2 < x$
+  + $3 < x < 100$
+  + $x >= 0$
+  + $x < 0$
+
+
+
+  #solution([
+    #figure(
+      kind: table
+    )[
+      #table(
+        columns: (1fr, 1fr),
+        table.header([Intervalo], [Clasificação]),
+        [$-1 <= x <= 1$], [intervalo fechado],
+        [$-2 < x$], [intervalo infinito],
+        [$3 < x < 100$], [intervalo aberto],
+        [$x >= 0$], [intervalo infinito],
+        [$x < 0$], [intervalo infinito],
+      )
+    ]
+  ])
+
++ Encontre a intersecção de cada uma dos seguintes pares de intervalos e classifique:
+  #set enum(numbering: "(a)")
+  + $[-1, 1]$ e $[0, 2]$
+    #solution([
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          scale(x: 200%)
+          let a_vals = (-1, 1)
+          let b_vals = (0, 2)
+
+          let x_min = calc.min(a_vals.at(0), b_vals.at(0)) - 1
+          let x_max = calc.max(a_vals.at(1), b_vals.at(1)) + 1
+
+          let y = (0, -1.5, -3)
+          let expr = ($[-1, 1]$, $[0, 2]$, $[-1, 1] inter [0, 2]$)
+
+          for arr_vals in (a_vals, b_vals){
+            for v in arr_vals {
+              line((v, y.at(0) + 0.5), (v, y.at(2) - 0.5), stroke: (dash: "dashed", paint: gray), name: "label-tick")
+              content("label-tick.start", [$#v$], anchor: "south", padding: 0.2)
+            }
+          }
+
+          for i in range(3) {
+            line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
+            content("axis.end", [$x$], anchor: "north", padding: 0.2)
+            content((x_min - 1, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            for arr_vals in (a_vals, b_vals){
+              for v in arr_vals {
+                line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
+              }
+            }
+          }
+
+          line((a_vals.at(0), y.at(0)), (a_vals.at(1), y.at(0)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(0)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((a_vals.at(1), y.at(0)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+          line((b_vals.at(0), y.at(1)), (b_vals.at(1), y.at(1)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(1)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((b_vals.at(1), y.at(1)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+          line((a_vals.at(1), y.at(2)), (b_vals.at(0), y.at(2)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(1), y.at(2)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((b_vals.at(0), y.at(2)), radius: (4pt/2, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+        })
+      ]
+      Como mostra a figura acima, trata-se do *intervalo fechado*: $[0, 1]$.
+    ])
+
+  + $[2, 5)$ e $(0, 4]$
+    #solution([
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          scale(x: 150%)
+          let a_vals = (2, 5)
+          let b_vals = (0, 4)
+
+          let x_min = calc.min(a_vals.at(0), b_vals.at(0)) - 1
+          let x_max = calc.max(a_vals.at(1), b_vals.at(1)) + 1
+
+          let y = (0, -1.5, -3)
+          let expr = ($[2, 5)$, $(0, 4]$, $[2, 5) inter (0, 4]$)
+
+          for arr_vals in (a_vals, b_vals){
+            for v in arr_vals {
+              line((v, y.at(0) + 0.5), (v, y.at(2) - 0.5), stroke: (dash: "dashed", paint: gray), name: "label-tick")
+              content("label-tick.start", [$#v$], anchor: "south", padding: 0.2)
+            }
+          }
+
+          for i in range(3) {
+            line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
+            content("axis.end", [$x$], anchor: "north", padding: 0.2)
+            content((x_min - 1, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            for arr_vals in (a_vals, b_vals){
+              for v in arr_vals {
+                line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
+              }
+            }
+          }
+
+          line((a_vals.at(0), y.at(0)), (a_vals.at(1), y.at(0)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(0)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((a_vals.at(1), y.at(0)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: white)
+
+          line((b_vals.at(0), y.at(1)), (b_vals.at(1), y.at(1)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(1)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: white)
+          circle((b_vals.at(1), y.at(1)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+          line((a_vals.at(0), y.at(2)), (b_vals.at(1), y.at(2)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(2)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((b_vals.at(1), y.at(2)), radius: (4pt/1.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+        })
+      ]
+      Como mostra a figura acima, trata-se do *intervalo fechado*: $[2, 4]$.
+    ])
+
+  + $0 < x$ e $x < 1$
+    #solution([
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          scale(x: 300%)
+          let a_vals = (0, )
+          let b_vals = (1, )
+
+
+          let x_min = calc.min(a_vals.at(0), b_vals.at(0)) - 1
+          let x_max = calc.max(a_vals.at(0), b_vals.at(0)) + 1
+
+          let y = (0, -1.5, -3)
+          let expr = (${x | 0 < x}$, ${x | x < 1}$, ${x | 0 < x} inter {x | x < 1}$)
+
+          for arr_vals in (a_vals, b_vals){
+            for v in arr_vals {
+              line((v, y.at(0) + 0.5), (v, y.at(2) - 0.5), stroke: (dash: "dashed", paint: gray), name: "label-tick")
+              content("label-tick.start", [$#v$], anchor: "south", padding: 0.2)
+            }
+          }
+
+          for i in range(3) {
+            line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
+            content("axis.end", [$x$], anchor: "north", padding: 0.2)
+            content((x_min - 1, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            for arr_vals in (a_vals, b_vals){
+              for v in arr_vals {
+                line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
+              }
+            }
+          }
+
+          line((a_vals.at(0), y.at(0)), (0.96*x_max, y.at(0)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(0)), radius: (4pt/3, 4pt), stroke: 1.5pt+primary-color, fill: white)
+
+          line((x_min, y.at(1)), (b_vals.at(0), y.at(1)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(1)), radius: (4pt/3, 4pt), stroke: 1.5pt+primary-color, fill: white)
+
+          line((a_vals.at(0), y.at(2)), (b_vals.at(0), y.at(2)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(2)), radius: (4pt/3, 4pt), stroke: 1.5pt+primary-color, fill: white)
+          circle((b_vals.at(0), y.at(2)), radius: (4pt/3, 4pt), stroke: 1.5pt+primary-color, fill: white)
+
+        })
+      ]
+      Como mostra a figura acima, trata-se do *intervalo aberto*: $(0, 1)$ ou ainda ${x | 0 < x < 1}$.
+    ])
+
+  + $-5 <= x <= -3$ e $-4 < x$
+    #solution([
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          scale(x: 250%)
+          let a_vals = (-5, -3)
+          let b_vals = (-4, )
+
+
+          let x_min = calc.min(a_vals.at(0), b_vals.at(0)) - 1
+          let x_max = calc.max(a_vals.at(1), b_vals.at(0)) + 1
+
+          let y = (0, -1.5, -3)
+          let expr = (${x | -5 <= x <= -3}$, ${x | -4 < x}$, ${-5 <= x <= -3} inter {x | -4 < x}$)
+
+          for arr_vals in (a_vals, b_vals){
+            for v in arr_vals {
+              line((v, y.at(0) + 0.5), (v, y.at(2) - 0.5), stroke: (dash: "dashed", paint: gray), name: "label-tick")
+              content("label-tick.start", [$#v$], anchor: "south", padding: 0.2)
+            }
+          }
+
+          for i in range(3) {
+            line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
+            content("axis.end", [$x$], anchor: "north", padding: 0.2)
+            content((x_min - 1, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            for arr_vals in (a_vals, b_vals){
+              for v in arr_vals {
+                line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
+              }
+            }
+          }
+
+          line((a_vals.at(0), y.at(0)), (a_vals.at(1), y.at(0)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(0)), radius: (4pt/2.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((a_vals.at(1), y.at(0)), radius: (4pt/2.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+          line((b_vals.at(0), y.at(1)), (1.05*x_max, y.at(1)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(1)), radius: (4pt/2.5, 4pt), stroke: 1.5pt+primary-color, fill: white)
+
+          line((b_vals.at(0), y.at(2)), (a_vals.at(1), y.at(2)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(2)), radius: (4pt/2.5, 4pt), stroke: 1.5pt+primary-color, fill: white)
+          circle((a_vals.at(1), y.at(2)), radius: (4pt/2.5, 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+        })
+      ]
+      Como mostra a figura acima, trata-se do *intervalo semi-aberto*: $(-4, 3]$ ou ainda ${x | -4 < x <= -3}$.
+    ])
+
+  + $[-7, -2]$ e $[-1, 0]$
+    #solution([
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          scale(x: 100%)
+          let a_vals = (-7, -2)
+          let b_vals = (-1, 0)
+
+          let x_min = calc.min(a_vals.at(0), b_vals.at(0)) - 1
+          let x_max = calc.max(a_vals.at(1), b_vals.at(1)) + 1
+
+          let y = (0, -1.5, -3)
+          let expr = ($[-7, -2]$, $[-1, 0]$, $[-7, -2] inter [-1, 0]$)
+
+          for arr_vals in (a_vals, b_vals){
+            for v in arr_vals {
+              line((v, y.at(0) + 0.5), (v, y.at(2) - 0.5), stroke: (dash: "dashed", paint: gray), name: "label-tick")
+              content("label-tick.start", [$#v$], anchor: "south", padding: 0.2)
+            }
+          }
+
+          for i in range(3) {
+            line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
+            content("axis.end", [$x$], anchor: "north", padding: 0.2)
+            content((x_min - 1.5, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            for arr_vals in (a_vals, b_vals){
+              for v in arr_vals {
+                line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
+              }
+            }
+          }
+
+          line((a_vals.at(0), y.at(0)), (a_vals.at(1), y.at(0)), stroke: 2.5pt+primary-color)
+          circle((a_vals.at(0), y.at(0)), radius: (4pt/1., 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((a_vals.at(1), y.at(0)), radius: (4pt/1., 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+          line((b_vals.at(0), y.at(1)), (b_vals.at(1), y.at(1)), stroke: 2.5pt+primary-color)
+          circle((b_vals.at(0), y.at(1)), radius: (4pt/1., 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+          circle((b_vals.at(1), y.at(1)), radius: (4pt/1., 4pt), stroke: 1.5pt+primary-color, fill: primary-color)
+
+
+
+        })
+      ]
+      Como mostra a figura acima, trata-se do *intervalo vazio*: $emptyset$.
+    ])  
 
