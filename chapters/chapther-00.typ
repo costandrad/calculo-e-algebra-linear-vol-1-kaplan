@@ -813,7 +813,7 @@
             content("eixo-x.end", [$x$], anchor: "north", padding: 0.05)
             for x in range(-2, 3) {
               line((x, y.at(i) + 0.1), (x, y.at(i) - 0.1), name: "tick")
-              content("tick", [$#x$], anchor: "north", padding: 0.2)
+              content("tick", [$#x$], anchor: "north", padding: 0.25)
             }
             content((-3.25, y.at(i) + dy.at(i)), [$#expr.at(i)$], anchor: "west", padding: 0.5)
           }
@@ -859,6 +859,194 @@
       $
         x/(x-1) >= 0 => {x in RR | x <= 0 " ou " x > 1}
       $
+    ])
+
+  + $display(x/(x+1)) - display(2/(x+1)) >= 0$
+    #solution([
+      Organizando a inequação acima, temos:
+      $
+        x/(x+1) - 2/(x+1) >= 0 => (x-2)/(x+1) >= 0
+      $
+      - Determinnemos os pontos críticos de $p(x) = x - 2$ e $q(x) = x+1$:
+        $
+          cases(
+            x - 2 = 0 => x = 2,
+            x + 1 = 0 => x = -1
+          )
+        $
+
+      - Análise de sinais:
+        #figure()[
+          #cetz.canvas({
+            import cetz.draw: *
+
+
+            scale(x: 150%)
+            let y = (0, -1.5, -3)
+            
+            let pc = (2, -1)
+            let pc_fill = (primary-color, white)
+
+            let expr = ($x - 2 >= 0$, $x + 1 >= 0$, $display((x - 2)/(x + 1)) >= 0$)
+            let dy = (0, 0, 0.1)
+
+            let x_min = calc.min(..pc) - 2
+            let x_max = calc.max(..pc) + 2
+            let n = (x_max - x_min) * 3 + 1
+
+            let sinal(x, i) = if i == 0 {
+              if x == pc.at(0) {
+                  $$
+                } else if x < pc.at(0) {
+                  $-$
+                } else {
+                  $+$
+              }
+            } else if i == 1 {
+              if x == pc.at(1) {
+                  $$
+                } else if x < pc.at(1) {
+                  $-$
+                } else {
+                  $+$
+              }
+            } else  {
+              if x == pc.at(1) {
+                  $$
+                } else if x >= pc.at(0) or x < pc.at(1) {
+                  $+$
+                } else {
+                  $-$
+              }
+            }
+            
+            for i in range(3) {
+              let ln = "axis-"+str(i+1)
+              line((x_min - 0.5, y.at(i)), (x_max + 0.5, y.at(i)), mark: (end: ">>", fill: black), name: ln)
+              content(ln+".end", [$x$], anchor: "north")
+              content((x_min - 0.8, y.at(i) - dy.at(i)), [$#expr.at(i)$], anchor: "east", padding: 0.1)
+
+              for xi in range(x_min, x_max + 1) {
+                line((xi, y.at(i) + 0.1), (xi, y.at(i) - 0.1), name: "tick")
+                content("tick.end", [$#xi$], anchor: "north", padding: 0.2)
+              }
+
+              for j in range(n) {
+                let xj = x_min + j/3.0
+                content((xj, y.at(i)), [#text(primary-color)[$#sinal(xj, i)$]], anchor: "south", padding: 0.2)
+              }
+            }
+
+            line((pc.at(0), y.at(0)), (x_max + 0.35, y.at(0)), stroke: 2.5pt+primary-color)
+            circle((pc.at(0), y.at(0)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: primary-color)
+
+            line((pc.at(1), y.at(1)), (x_max + 0.35, y.at(1)), stroke: 2.5pt+primary-color)
+            circle((pc.at(1), y.at(1)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+
+            
+            line((pc.at(0), y.at(2)), (x_max + 0.35, y.at(2)), stroke: 2.5pt+primary-color)
+            circle((pc.at(0), y.at(2)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: primary-color)
+            line((x_min - 0.5, y.at(2)), (pc.at(1), y.at(2)), stroke: 2.5pt+primary-color)
+            circle((pc.at(1), y.at(2)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+          })
+        ]
+        Portanto,
+        $
+          x/(x+1) - 2/(x+1) >= 0 => {x in RR | x < -1 " ou " x >= 2}
+        $
+    ])
+
+  + $display(1/x) < -1$
+    #solution([
+      $
+        1/x < -1 => 1/x + 1 < 0 => (1 + x)/x < 0
+      $
+
+      - Pontos críticos:
+      $
+        cases(
+          1 + x = 0 => x = -1,
+          x = 0
+        )
+      $
+      - Análise de sinais
+        #figure()[
+          #cetz.canvas({
+            import cetz.draw: *
+
+
+            scale(x: 150%)
+            let y = (0, -1.5, -3)
+            
+            let pc = (-1, 0)
+            let pc_fill = (primary-color, white)
+
+            let expr = ($1 + x < 0$, $x < 0$, $display((1+x)/x) < 0$)
+            let dy = (0, 0, 0.1)
+
+            let x_min = calc.min(..pc) - 2
+            let x_max = calc.max(..pc) + 2
+            let n = (x_max - x_min) * 3 + 1
+
+            let sinal(x, i) = if i == 0 {
+              if x == pc.at(0) {
+                  $$
+                } else if x < pc.at(0) {
+                  $-$
+                } else {
+                  $+$
+              }
+            } else if i == 1 {
+              if x == pc.at(1) {
+                  $$
+                } else if x < pc.at(1) {
+                  $-$
+                } else {
+                  $+$
+              }
+            } else {
+              if x in pc {
+                $$
+              } else if x > pc.at(0) and x < pc.at(1) {
+                $-$
+              } else {
+                $+$
+              }
+            }
+            
+            for i in range(3) {
+              let ln = "axis-"+str(i+1)
+              line((x_min - 0.5, y.at(i)), (x_max + 0.5, y.at(i)), mark: (end: ">>", fill: black), name: ln)
+              content(ln+".end", [$x$], anchor: "north")
+              content((x_min - 0.8, y.at(i) - dy.at(i)), [$#expr.at(i)$], anchor: "east", padding: 0.1)
+
+              for xi in range(x_min, x_max + 1) {
+                line((xi, y.at(i) + 0.1), (xi, y.at(i) - 0.1), name: "tick")
+                content("tick.end", [$#xi$], anchor: "north", padding: 0.2)
+              }
+
+              for j in range(n) {
+                let xj = x_min + j/3.0
+                content((xj, y.at(i)), [#text(primary-color)[$#sinal(xj, i)$]], anchor: "south", padding: 0.2)
+              }
+            }
+
+            line((x_min - 0.5, y.at(0)), (pc.at(0), y.at(0)), stroke: 2.5pt+primary-color)
+            circle((pc.at(0), y.at(0)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+
+            line((x_min - 0.5, y.at(1)), (pc.at(1), y.at(1)), stroke: 2.5pt+primary-color)
+            circle((pc.at(1), y.at(1)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+
+            
+            line((pc.at(0), y.at(2)), (pc.at(1), y.at(2)), stroke: 2.5pt+primary-color)
+            circle((pc.at(0), y.at(2)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+            circle((pc.at(1), y.at(2)), radius: (5pt/1.5, 5pt), stroke: 2pt+primary-color, fill: white)
+          })
+        ]
+        Portanto,
+        $
+          1/x < -1 => {x in RR | -1 < x < 0}
+        $
     ])
   
 
