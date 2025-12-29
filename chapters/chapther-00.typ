@@ -462,6 +462,7 @@
           })
         ]
       ])
+      #v(4cm)
   + O conjunto vazio.
     #solution([
       $ 3 in.not emptyset $
@@ -695,7 +696,7 @@
 
   + $(x - 1)(x - 2) < 0$
     #solution([
-      consideremos a função $f(x) = (x-1)(x-2)$. 
+      Consideremos a função $f(x) = (x-1)(x-2)$. 
       Iniciamos determinando os zeros de $f(x)$:
       $
         f(x) = 0 => (x-1)(x-2) = 0 => 
@@ -878,6 +879,7 @@
       $
     ])
 
+    #v(2cm)
   + $display(x/(x+1)) - display(2/(x+1)) >= 0$
     #solution([
       Organizando a inequação acima, temos:
@@ -1092,6 +1094,7 @@
     ]
   ])
 
+  #v(7cm)
 + Encontre a intersecção de cada uma dos seguintes pares de intervalos e classifique:
   #set enum(numbering: "(a)")
   + $[-1, 1]$ e $[0, 2]$
@@ -1196,6 +1199,7 @@
       Como mostra a figura acima, trata-se do *intervalo fechado*: $[2, 4]$.
     ])
 
+    #v(5cm)
   + $0 < x$ e $x < 1$
     #solution([
       #figure()[
@@ -1273,7 +1277,7 @@
           for i in range(3) {
             line((x_min, y.at(i)), (x_max, y.at(i)), mark: (end: ">>", fill: black), name: "axis")
             content("axis.end", [$x$], anchor: "north", padding: 0.2)
-            content((x_min - 1, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
+            content((x_min - 1.25, y.at(i)), [#expr.at(i)], anchor: "center", padding: 0.6)
             for arr_vals in (a_vals, b_vals){
               for v in arr_vals {
                 line((v, y.at(i) + 0.2), (v, y.at(i) - 0.2))
@@ -1297,6 +1301,7 @@
       Como mostra a figura acima, trata-se do *intervalo semi-aberto*: $(-4, 3]$ ou ainda ${x | -4 < x <= -3}$.
     ])
 
+    #v(5cm)
   + $[-7, -2]$ e $[-1, 0]$
     #solution([
       #figure()[
