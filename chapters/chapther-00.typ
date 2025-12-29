@@ -692,13 +692,13 @@
       $
       Reescrevendo $f(x)$ como $f(x) = x^2 -3x + 2$, temos que o coeficiente do termo $x^2$ é igual a $1 < 0$, ou seja, o gráfico da função é uma parábola com concavidade voltada para cima. 
 
-      O esboço do gráfico seguinte mostra o estudo do sinal de $f(x)$:
+      O seguinte esboço do gráfico de $f(x)$ mostra o estudo do sinal da função:
 
       #figure()[
         #cetz.canvas({
           import cetz.draw: *
 
-          plot.plot(..opts, x-min: -.25, x-max: 3.25, y-max: 3, {
+          plot.plot(..opts, x-min: -.25, x-max: 3.25,  y-max: 2.5, name: "plot", {
             plot.add(
               domain: (-1, 4),
               x => (x - 1)*(x - 2),
@@ -707,11 +707,36 @@
             plot.add-fill-between(
               domain: (1, 2),
               x => 0, x => (x - 1)*(x - 2),
-
+              style: (stroke: none, fill: primary-color.transparentize(85%))
             )
+            plot.add(
+              ((1, 0), (2, 0),),
+              mark: "o",
+              mark-style: (stroke: 1.5pt+primary-color, fill: white),
+              style: (stroke: 2.5pt+primary-color)
+            )
+            plot.annotate({
+              content((1, 0), [$1$], anchor: "south-east", padding: 0.02)
+              content((2, 0), [$2$], anchor: "south-west", padding: 0.02)
+            })
+            plot.add-anchor("pt1", (0.3, 0.5))
+            plot.add-anchor("pt2", (2.7, 0.5))
+            plot.add-anchor("pt3", (1.5, -0.08))
+            plot.add-anchor("pt4", (2.5, -0.5))
           })
+          circle("plot.pt1", radius: 8pt, stroke: primary-color, fill: white)
+          content("plot.pt1", [#text(primary-color)[$+$]])
+          circle("plot.pt2", radius: 8pt, stroke: primary-color, fill: white)
+          content("plot.pt2", [#text(primary-color)[$+$]])
+          line("plot.pt3", "plot.pt4", mark: (start: ">"), name: "line", fill: primary-color, stroke: primary-color)
+          circle("plot.pt4", radius: 8pt, stroke: primary-color, fill: white)
+          content("plot.pt4", [#text(primary-color)[$-$]])
         })
       ]
+      Portanto, 
+      $
+        (x-1)(x-2) < 0 => {x in RR | 1 < x < 2}.
+      $
     ])
   
 
