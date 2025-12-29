@@ -738,5 +738,48 @@
         (x-1)(x-2) < 0 => {x in RR | 1 < x < 2}.
       $
     ])
+
+  + $x^2 + x + 1 > 0$
+    #solution([
+      Façamos o estudo do sinal da função $f(x) = x^2 + x + 1$. Inicialmente, determinemos as raízes ou zeros de $f(x)$. Sejam $a = 1$, $b = 1$ e $c = 1$ respectivamente os coeficientes dos termos $x^2$, $x$ e termo independente do polinômio de segundo grau. Então, as raízes de $f(x)$ são
+      $
+        f(x) = 0 => x^2 + x + 1 = 0 => &x  = (-b plus.minus sqrt(b^2 - 4 a c))/(2 a) \
+        &=> x= (-1 plus.minus sqrt(1^2 - 4 dot 1 dot 1))/(2 dot 1)\
+        &=> x= (-1 plus.minus sqrt(-3))/2
+      $ 
+      
+      Note que não existem raízes reais. Logo, a parábola não toca o eixo horixontal (eixo $x$) em nenhum ponto. Para completar a análise, observemos que o coeficiente $a = 1$ é negatico. Isso significa que a parábola  possui ponto de mínimo e concavidade voltada para cima. O esboço seguinte ilustra o estudo do sinal de $f(x)$:
+
+      #figure()[
+        #cetz.canvas({
+          import cetz.draw: *
+
+          plot.plot(..opts, x-min: -2.5, x-max: 1.5,  y-min: -.5,  name: "plot", {
+            plot.add(
+              domain: (-2.5, 1.5),
+              x => calc.pow(x, 2) + x + 1,
+              style: line-styles
+            )
+            plot.add-fill-between(
+              domain: (-2.5, 1.5),
+              x => 0,
+              x => calc.pow(x, 2) + x + 1,
+              style: (stroke: none, fill: primary-color.transparentize(85%))
+            )
+            plot.add-anchor("pt", (-0.5, 0.4))
+            plot.add(
+              domain: (-2.5, 1.5),
+              x => 0,
+              style: (stroke: 2.5pt+primary-color)
+            )
+          })
+          circle("plot.pt", radius: 7pt, stroke: primary-color, fill: white)
+          content("plot.pt", [#text(primary-color)[$+$]])
+        })
+        Portanto, $x^2 + x + 1 > 0 => {x | x in RR}$.
+      ]
+
+      
+    ])
   
 
