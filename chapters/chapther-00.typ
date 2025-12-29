@@ -809,13 +809,13 @@
           }
 
           for i in range(3) {
-            line((-2.5, y.at(i)), (2.5, y.at(i)), mark: (end: ">>", fill: black), name: "eixo-x")
+            line((-2.25, y.at(i)), (2.25, y.at(i)), mark: (end: ">>", fill: black), name: "eixo-x")
             content("eixo-x.end", [$x$], anchor: "north", padding: 0.05)
             for x in range(-2, 3) {
               line((x, y.at(i) + 0.1), (x, y.at(i) - 0.1), name: "tick")
               content("tick", [$#x$], anchor: "north", padding: 0.2)
             }
-            content((-3.5, y.at(i) + dy.at(i)), [$#expr.at(i)$], anchor: "west", padding: 0.5)
+            content((-3.25, y.at(i) + dy.at(i)), [$#expr.at(i)$], anchor: "west", padding: 0.5)
           }
           for j in range(17) {
             let x = -2 + 0.25 * j
@@ -833,10 +833,10 @@
             } else {
               $+$
             }
-            let sinal_3 = if x < 1 {
-              $-$
-            } else if x == 1 {
+            let sinal_3 = if  x == 1 {
               $$
+            } else if x > 0 and x < 1 {
+              $-$ 
             } else {
               $+$
             }
@@ -844,17 +844,20 @@
             content((x, y.at(1)), [#text(primary-color)[#sinal_2]], anchor: "south", padding: 0.2)
             content((x, y.at(2)), [#text(primary-color)[#sinal_3]], anchor: "south", padding: 0.2)
           }
-          line((0, y.at(0)), (2.4, y.at(0)), stroke: 2.5pt+primary-color)
+          line((0, y.at(0)), (2.15, y.at(0)), stroke: 2.5pt+primary-color)
           circle((0, y.at(0)), radius: (1.6pt, 4pt), fill: primary-color, stroke: 2pt+primary-color)
-          line((1, y.at(1)), (2.4, y.at(1)), stroke: 2.5pt+primary-color)
+          line((1, y.at(1)), (2.15, y.at(1)), stroke: 2.5pt+primary-color)
           circle((1, y.at(1)), radius: (1.6pt, 4pt), fill: white, stroke: 2pt+primary-color)
-          line((1, y.at(2)), (2.4, y.at(2)), stroke: 2.5pt+primary-color)
+          line((-2.25, y.at(2)), (0, y.at(2)), stroke: 2.5pt+primary-color)
+          circle((0, y.at(2)), radius: (1.6pt, 4pt), fill: primary-color, stroke: 2pt+primary-color)
+          line((1, y.at(2)), (2.15, y.at(2)), stroke: 2.5pt+primary-color)
           circle((1, y.at(2)), radius: (1.6pt, 4pt), fill: white, stroke: 2pt+primary-color)
+
         })
       ]
       Portanto, 
       $
-        x/(x-1) >= 0 => {x in RR | x > 1}
+        x/(x-1) >= 0 => {x in RR | x <= 0 " ou " x > 1}
       $
     ])
   
